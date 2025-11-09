@@ -11,10 +11,10 @@ public class PlayerSpawner
         _playerCharacterStats = playerCharacterStats;
     }
 
-    public IPlayerCharacter SpawnPlayer()
+    public PlayerCharacter SpawnPlayer()
     {
         GameObject characterGO = Object.Instantiate(_characterPrefab);
-        IPlayerCharacter character = characterGO.AddComponent<PlayerCharacter>();
+        PlayerCharacter character = characterGO.AddComponent<PlayerCharacter>();
 
         character.Initialize(_playerCharacterStats);
 

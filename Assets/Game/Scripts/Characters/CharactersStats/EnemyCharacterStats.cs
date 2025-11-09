@@ -14,6 +14,9 @@ public class EnemyCharacterStats : CharacterStats
     public SpawnPoint[] SpawnPoints { get; }
     public Material Material { get; }
     public Transform[] WaypointTransforms { get; private set; }
+    public EnemyPlayerDetector EnemyPlayerDetector { get; private set; }
 
     public void SetWaypointTransforms(IEnumerable<Transform> waypointTransforms) => WaypointTransforms = waypointTransforms.ToArray();
+
+    public void SetEnemyPlayerDetector(EnemyPlayerDetector enemyPlayerDetector) => EnemyPlayerDetector = enemyPlayerDetector;
 }

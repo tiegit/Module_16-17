@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyCharacter : Character, IEnemyCharacter
+public class EnemyCharacter : Character
 {
     public EnemyCharacterStats EnemyCharacterStats { get; private set; }
 
@@ -13,12 +13,17 @@ public class EnemyCharacter : Character, IEnemyCharacter
         SetEnemyMaterial();
     }
 
+    public void Kill()
+    {
+        //TODO добавить эффект уничтожения
+        gameObject.SetActive(false);
+    }
+
     private void SetEnemyMaterial()
     {
         MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
 
         if (meshRenderer != null)
             meshRenderer.material = EnemyCharacterStats.Material;
-
     }
 }

@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
-public class PlayerBrain : IPlayerCharacterBrain
+public class PlayerController
 {
     private PlayerInput _playerInput;
 
-    public PlayerBrain(IPlayerCharacter character, PlayerInput playerInput)
+    public PlayerController(PlayerCharacter character, PlayerInput playerInput)
     {
         PlayerCharacter = character;
         _playerInput = playerInput;
     }
 
-    public IPlayerCharacter PlayerCharacter { get; private set; }
+    public PlayerCharacter PlayerCharacter { get; private set; }
 
     public void CustomUpdate()
     {

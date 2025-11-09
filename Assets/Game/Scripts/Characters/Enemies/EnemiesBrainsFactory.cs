@@ -1,6 +1,6 @@
 ﻿public class EnemiesBrainsFactory
 {
-    public IEnemyCharacterBrain GetBrain(IEnemyCharacter enemyCharacter)
+    public EnemyBrain GetBrain(EnemyCharacter enemyCharacter)
     {
         return null;
     }

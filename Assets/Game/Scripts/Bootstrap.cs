@@ -9,7 +9,7 @@ public class Bootstrap : MonoBehaviour
 
     [SerializeField, Space(15)] private float _enemySpeedDivider = 1.5f;
     [SerializeField] private Material _enemyMaterial;
-    [SerializeField] private PlayerDetector _playerDetectorPrefab;
+    [SerializeField] private EnemyPlayerDetector _enemyPlayerDetectorPrefab;
 
     [SerializeField, Space(15)] private TargetFollower _cameraTargetFollower;
 
@@ -17,7 +17,7 @@ public class Bootstrap : MonoBehaviour
 
     private PlayerInput _playerInput;
     private Game _game;
-    private List<IEnemyCharacterBrain> _enemyCharactersBrains = new List<IEnemyCharacterBrain>();
+    private List<EnemyBrain> _enemyCharactersBrains = new List<EnemyBrain>();
 
     private void Awake()
     {
@@ -27,19 +27,19 @@ public class Bootstrap : MonoBehaviour
         EnemyCharacterStats enemyCharacterStats = new EnemyCharacterStats(_moveSpeed / _enemySpeedDivider, _rotationSpeed, _enemySpawnPointsContainer.SpawnPoints, _enemyMaterial);
 
         PlayerSpawner playerSpawner = new PlayerSpawner(_characterPrefab, playerCharacterStats);
-        IPlayerCharacter playerCharacter = playerSpawner.SpawnPlayer();
-        IPlayerCharacterBrain playerCharacterBrain = new PlayerBrain(playerCharacter, _playerInput);
+        PlayerCharacter playerCharacter = playerSpawner.SpawnPlayer();
+        PlayerController playerCharacterBrain = new PlayerController(playerCharacter, _playerInput);
 
         _cameraTargetFollower.Initialize(playerCharacter.Transform);
 
-        EnemiesSpawner enemiesSpawner = new EnemiesSpawner(_characterPrefab, _playerDetectorPrefab, enemyCharacterStats);
-        List<IEnemyCharacter> enemyCharacters = new List<IEnemyCharacter>(enemiesSpawner.SpawnEnemies());
+        EnemiesSpawner enemiesSpawner = new EnemiesSpawner(_characterPrefab, _enemyPlayerDetectorPrefab, enemyCharacterStats);
+        List<EnemyCharacter> enemyCharacters = new List<EnemyCharacter>(enemiesSpawner.SpawnEnemies());
 
         EnemiesBrainsFactory enemiesBrainsFactory = new EnemiesBrainsFactory();
 
         foreach (var enemyCharacter in enemyCharacters)
         {
-            IEnemyCharacterBrain enemyCharacterBrain = enemiesBrainsFactory.GetBrain(enemyCharacter);
+            EnemyBrain enemyCharacterBrain = enemiesBrainsFactory.GetBrain(enemyCharacter);
 
             if (enemyCharacterBrain != null)
                 _enemyCharactersBrains.Add(enemyCharacterBrain);

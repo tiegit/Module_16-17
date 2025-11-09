@@ -1,7 +1,7 @@
 public enum EnemyReaction
 {
     None,
-    RunAwayInOppositeDirection,
-    AggroAndChase,
+    RunAway,
+    Chase,
     PanicAndDie
 }

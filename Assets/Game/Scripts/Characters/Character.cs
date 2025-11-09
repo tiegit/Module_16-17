@@ -37,10 +37,12 @@ public abstract class Character : MonoBehaviour
     public void Reset()
     {
         _rigidbody.isKinematic = true;
+        gameObject.SetActive(false);
 
         transform.position = _initialPosition;
         transform.rotation = _initialRotation;
 
+        gameObject.SetActive(true);
         _rigidbody.isKinematic = false;
     }
 }

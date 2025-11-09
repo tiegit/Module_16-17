@@ -2,32 +2,32 @@
 
 public class Game
 {
-    private readonly PlayerInput _playerInput;
-    private readonly IPlayerCharacter _playerCharacter;
-    private readonly IPlayerCharacterBrain _playerCharacterBrain;
-    private readonly List<IEnemyCharacter> _enemyCharacters;
-    private readonly List<IEnemyCharacterBrain> _enemyCharactersBrains;
+    private PlayerInput _playerInput;
+    private PlayerCharacter _playerCharacter;
+    private PlayerController _playerController;
+    private List<EnemyCharacter> _enemyCharacters;
+    private List<EnemyBrain> _enemyCharactersBrains;
 
     public Game(PlayerInput playerInput,
-                IPlayerCharacter playerCharacter,
-                IPlayerCharacterBrain playerCharacterBrain,
-                IEnumerable<IEnemyCharacter> enemyCharacters,
-                IEnumerable<IEnemyCharacterBrain> enemyCharactersBrains)
+                PlayerCharacter playerCharacter,
+                PlayerController playerController,
+                IEnumerable<EnemyCharacter> enemyCharacters,
+                IEnumerable<EnemyBrain> enemyCharactersBrains)
     {
         _playerInput = playerInput;
         _playerCharacter = playerCharacter;
-        _playerCharacterBrain = playerCharacterBrain;
-        _enemyCharacters = new List<IEnemyCharacter>(enemyCharacters);
-        _enemyCharactersBrains = new List<IEnemyCharacterBrain>(enemyCharactersBrains);
+        _playerController = playerController;
+        _enemyCharacters = new List<EnemyCharacter>(enemyCharacters);
+        _enemyCharactersBrains = new List<EnemyBrain>(enemyCharactersBrains);
     }
 
     public void CustomUpdate()
     {
-        _playerCharacterBrain.CustomUpdate();
+        _playerController.CustomUpdate();
 
         if (_enemyCharactersBrains != null && _enemyCharactersBrains.Count > 0)
         {
-            foreach (IEnemyCharacterBrain enemyCharacterBrain in _enemyCharactersBrains)
+            foreach (EnemyBrain enemyCharacterBrain in _enemyCharactersBrains)
                 enemyCharacterBrain?.CustomUpdate();
         }
 
@@ -35,7 +35,7 @@ public class Game
         {
             _playerCharacter.Reset();
 
-            foreach (IEnemyCharacter enemyCharacter in _enemyCharacters)
+            foreach (EnemyCharacter enemyCharacter in _enemyCharacters)
                 enemyCharacter.Reset();
         }
     }

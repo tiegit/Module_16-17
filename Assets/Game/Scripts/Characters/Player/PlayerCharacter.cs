@@ -1,3 +1,3 @@
-﻿public class PlayerCharacter : Character, IPlayerCharacter
+﻿public class PlayerCharacter : Character
 {
 }

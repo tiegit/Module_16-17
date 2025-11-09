@@ -5057,11 +5057,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterPrefab: {fileID: 2230601186080798641, guid: 5d309de4058894a4b9ec1d94807bbd52,
     type: 3}
-  _moveSpeed: 6
-  _rotationSpeed: 300
+  _moveSpeed: 8
+  _rotationSpeed: 400
   _enemySpeedDivider: 1.5
   _enemyMaterial: {fileID: 2100000, guid: 33264d6399235d349a53e5df70ea6a1c, type: 2}
-  _playerDetectorPrefab: {fileID: 349417175302045627, guid: 2fb6854dac8bd1d428b9715a2f9965b5,
+  _enemyPlayerDetectorPrefab: {fileID: 349417175302045627, guid: 2fb6854dac8bd1d428b9715a2f9965b5,
     type: 3}
   _cameraTargetFollower: {fileID: 330585548}
   _enemySpawnPointsContainer: {fileID: 470581407}
