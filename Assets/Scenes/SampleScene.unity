@@ -651,7 +651,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -677,13 +677,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 10, z: -13}
+  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 0, y: 7, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1135,6 +1135,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9601959, y: 0.99995726, z: 0.16504326}
   m_Center: {x: -0.00018185377, y: 0.49999878, z: 0.0000004209578}
+--- !u!114 &421366838 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3016201441823563528, guid: 48322b7f6680c9640bd9d68c6f51d449,
+    type: 3}
+  m_PrefabInstance: {fileID: 397390123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb6a0361a0267c418b7d13fd0b23337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &463750956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1242,6 +1254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 470581406}
+  - component: {fileID: 470581407}
   m_Layer: 0
   m_Name: EnemySpawnPoints
   m_TagString: Untagged
@@ -1267,6 +1280,22 @@ Transform:
   - {fileID: 397390124}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &470581407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470581405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7012e0c8b38e614d84be6277f8d1323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPoint:
+  - {fileID: 1694793538}
+  - {fileID: 760097826}
+  - {fileID: 421366838}
 --- !u!1 &490580363 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eef6e5e378bd9594ba18d81d1222e608,
@@ -1812,6 +1841,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 760097824}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &760097826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3016201441823563528, guid: 48322b7f6680c9640bd9d68c6f51d449,
+    type: 3}
+  m_PrefabInstance: {fileID: 760097824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb6a0361a0267c418b7d13fd0b23337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &772763011 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eef6e5e378bd9594ba18d81d1222e608,
@@ -4162,6 +4203,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6870114349386281167}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1694793538 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3016201441823563528, guid: 48322b7f6680c9640bd9d68c6f51d449,
+    type: 3}
+  m_PrefabInstance: {fileID: 6870114349386281167}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb6a0361a0267c418b7d13fd0b23337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1718466069 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eef6e5e378bd9594ba18d81d1222e608,
@@ -4984,7 +5037,7 @@ Transform:
   m_GameObject: {fileID: 2132871033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5002,11 +5055,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b7ae62b0c99a74980361cf2cba94b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraTargetFollower: {fileID: 330585548}
-  _characterPrefab: {fileID: 6486404035447231769, guid: 5d309de4058894a4b9ec1d94807bbd52,
+  _characterPrefab: {fileID: 2230601186080798641, guid: 5d309de4058894a4b9ec1d94807bbd52,
     type: 3}
   _moveSpeed: 6
   _rotationSpeed: 300
+  _enemySpeedDivider: 1.5
+  _enemyMaterial: {fileID: 2100000, guid: 33264d6399235d349a53e5df70ea6a1c, type: 2}
+  _playerDetectorPrefab: {fileID: 349417175302045627, guid: 2fb6854dac8bd1d428b9715a2f9965b5,
+    type: 3}
+  _cameraTargetFollower: {fileID: 330585548}
+  _enemySpawnPointsContainer: {fileID: 470581407}
 --- !u!1001 &6870114349386281167
 PrefabInstance:
   m_ObjectHideFlags: 0

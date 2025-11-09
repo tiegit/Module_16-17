@@ -16,7 +16,7 @@ public enum EnemyReaction
     PanicAndDie
 }
 
-public class SpawnPointConfig : MonoBehaviour
+public class SpawnPoint : MonoBehaviour
 {
     [SerializeField] private IdleBehaviour _idleBehaviour = IdleBehaviour.None;
     [SerializeField] private EnemyReaction _enemyReaction = EnemyReaction.None;
@@ -25,6 +25,9 @@ public class SpawnPointConfig : MonoBehaviour
 
     public IdleBehaviour IdleBehaviour => _idleBehaviour;
     public EnemyReaction EnemyReaction => _enemyReaction;
+
+    public Vector3 Position => transform.position;
+
     public bool HasWaypoints => _waypointTransforms != null && _waypointTransforms.Length > 0;
     public Transform[] WaypointTransforms => _waypointTransforms;
 }

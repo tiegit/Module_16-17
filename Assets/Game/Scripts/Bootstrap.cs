@@ -1,35 +1,60 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] private Character _characterPrefab;
+    [SerializeField] private GameObject _characterPrefab;
     [SerializeField] private float _moveSpeed = 6f;
     [SerializeField] private float _rotationSpeed = 300f;
 
+    [SerializeField, Space(15)] private float _enemySpeedDivider = 1.5f;
+    [SerializeField] private Material _enemyMaterial;
+    [SerializeField] private PlayerDetector _playerDetectorPrefab;
+
     [SerializeField, Space(15)] private TargetFollower _cameraTargetFollower;
 
+    [SerializeField, Space(15)] private EnemySpawnPointsContainer _enemySpawnPointsContainer;
+
     private PlayerInput _playerInput;
-    private Character _playerCharacter;
-    private Brain _playerBrain;
     private Game _game;
+    private List<IEnemyCharacterBrain> _enemyCharactersBrains = new List<IEnemyCharacterBrain>();
 
     private void Awake()
     {
         _playerInput = new PlayerInput();
-        CharacterStats characterStats = new CharacterStats(_moveSpeed, _rotationSpeed);
 
-        PlayerSpawner playerInstaller = new PlayerSpawner(_characterPrefab, _playerInput, characterStats);
-        playerInstaller.SpawnPlayer(out _playerCharacter, out _playerBrain);
+        PlayerCharacterStats playerCharacterStats = new PlayerCharacterStats(_moveSpeed, _rotationSpeed);
+        EnemyCharacterStats enemyCharacterStats = new EnemyCharacterStats(_moveSpeed / _enemySpeedDivider, _rotationSpeed, _enemySpawnPointsContainer.SpawnPoints, _enemyMaterial);
 
-        _cameraTargetFollower.Initialize(_playerCharacter.transform);
+        PlayerSpawner playerSpawner = new PlayerSpawner(_characterPrefab, playerCharacterStats);
+        IPlayerCharacter playerCharacter = playerSpawner.SpawnPlayer();
+        IPlayerCharacterBrain playerCharacterBrain = new PlayerBrain(playerCharacter, _playerInput);
 
-        _game = new Game(_playerInput, _playerCharacter);
+        _cameraTargetFollower.Initialize(playerCharacter.Transform);
+
+        EnemiesSpawner enemiesSpawner = new EnemiesSpawner(_characterPrefab, _playerDetectorPrefab, enemyCharacterStats);
+        List<IEnemyCharacter> enemyCharacters = new List<IEnemyCharacter>(enemiesSpawner.SpawnEnemies());
+
+        EnemiesBrainsFactory enemiesBrainsFactory = new EnemiesBrainsFactory();
+
+        foreach (var enemyCharacter in enemyCharacters)
+        {
+            IEnemyCharacterBrain enemyCharacterBrain = enemiesBrainsFactory.GetBrain(enemyCharacter);
+
+            if (enemyCharacterBrain != null)
+                _enemyCharactersBrains.Add(enemyCharacterBrain);
+        }
+
+        _game = new Game(_playerInput,
+                         playerCharacter,
+                         playerCharacterBrain,
+                         enemyCharacters,
+                         _enemyCharactersBrains);
     }
 
     private void Update()
     {
         _playerInput.CustomUpdate();
-        _playerBrain.CustomUpdate();
         _game.CustomUpdate();
     }
 }
