@@ -1,34 +1,55 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class WalkToRandomPointsBehaviour
+public class WalkToRandomPointsBehaviour : IBehaviour
 {
-    private const float DeltaDistance = 0.6f;
+    private const float SecondsBetweenChangeTarget = 2f;
 
-    private List<Vector3> _waypoints;
+    private EnemyCharacter _enemyCharacter;
 
-    private Vector3 _currentTargetPosition;
+    private bool isActiveBehaviour;
+    private DateTime _lastSwitchTime;
+    private Vector3 _currentDirection;
 
-    public WalkToRandomPointsBehaviour(IEnumerable<Transform> waypointTransforms)
+    public WalkToRandomPointsBehaviour(EnemyCharacter enemyCharacter)
     {
-        _waypoints = new List<Vector3>(waypointTransforms.Select(w => w.position));
+        _enemyCharacter = enemyCharacter;
 
-        SwitchTarget();
+        Reset();
     }
 
-    public Vector3 GetDirection(Vector3 characterPosition)
-    {
-        if (Vector3.Distance(characterPosition, _currentTargetPosition) <= DeltaDistance)
-            SwitchTarget();
+    public void Start() => isActiveBehaviour = true;
 
-        return (_currentTargetPosition - characterPosition).normalized;
+    public void Stop() => isActiveBehaviour = false;
+
+    public void Reset()
+    {
+        isActiveBehaviour = true;
+
+        _lastSwitchTime = DateTime.UtcNow;
+        ChangeDirection();
     }
 
-    private void SwitchTarget()
+    public void CustomUpdate(Vector3 characterPosition)
     {
-        int randomIndex = Random.Range(0, _waypoints.Count);
+        if (isActiveBehaviour == false)
+            return;
 
-        _currentTargetPosition = _waypoints[randomIndex];
+        if ((DateTime.UtcNow - _lastSwitchTime).TotalSeconds >= SecondsBetweenChangeTarget)
+        {
+            ChangeDirection();
+            _lastSwitchTime = DateTime.UtcNow;
+        }
+
+        _enemyCharacter.SetMoveDirection(_currentDirection);
+        _enemyCharacter.SetRotationDirection(_currentDirection);
+    }
+
+    private void ChangeDirection()
+    {
+        Vector2 randomDirection2D = Random.insideUnitCircle.normalized;
+
+        _currentDirection = new Vector3(randomDirection2D.x, 0f, randomDirection2D.y);
     }
 }

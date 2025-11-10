@@ -7,14 +7,18 @@ public class EnemiesSpawner
     private GameObject _characterPrefab;
     private EnemyPlayerDetector _enemyPlayerDetectorPrefab;
     private SpawnPoint[] _spawnPoints;
+    private CommonEnemyCharacterStats _commonEnemyCharacterStats;
     private EnemyCharacterStats _enemyCharacterStats;
 
-    public EnemiesSpawner(GameObject characterPrefab, EnemyPlayerDetector enemyPlayerDetectorPrefab, EnemyCharacterStats enemyCharacterStats)
+    public EnemiesSpawner(GameObject characterPrefab,
+                          EnemyPlayerDetector enemyPlayerDetectorPrefab,
+                          CommonEnemyCharacterStats commonEnemyCharacterStats,
+                          IEnumerable<SpawnPoint> spawnPoints)
     {
         _characterPrefab = characterPrefab;
         _enemyPlayerDetectorPrefab = enemyPlayerDetectorPrefab;
-        _enemyCharacterStats = enemyCharacterStats;
-        _spawnPoints = _enemyCharacterStats.SpawnPoints.ToArray();
+        _commonEnemyCharacterStats = commonEnemyCharacterStats;
+        _spawnPoints = spawnPoints.ToArray();
     }
 
     public IEnumerable<EnemyCharacter> SpawnEnemies()
@@ -28,8 +32,12 @@ public class EnemiesSpawner
 
             EnemyPlayerDetector enemyPlayerDetector = Object.Instantiate(_enemyPlayerDetectorPrefab, spawnPoint.Position, Quaternion.identity, enemy.Transform);
 
-            _enemyCharacterStats.SetWaypointTransforms(spawnPoint.WaypointTransforms);
-            _enemyCharacterStats.SetEnemyPlayerDetector(enemyPlayerDetector);
+            _enemyCharacterStats = new EnemyCharacterStats(_commonEnemyCharacterStats.CurrentMoveSpeed,
+                                                           _commonEnemyCharacterStats.CurrentRotationSpeed,
+                                                           _commonEnemyCharacterStats.Material,
+                                                           spawnPoint,
+                                                           spawnPoint.WaypointTransforms,
+                                                           enemyPlayerDetector);
 
             enemy.Initialize(_enemyCharacterStats);
 

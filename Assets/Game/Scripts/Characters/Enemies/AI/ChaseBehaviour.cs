@@ -1,18 +1,39 @@
 ﻿using UnityEngine;
 
-public class ChaseBehaviour
+public class ChaseBehaviour : IBehaviour
 {
     private const float DeltaDistance = 0.6f;
 
-    private Transform _targetTransform;
+    private EnemyCharacter _enemyCharacter;
+    private PlayerCharacter _playerCharacter;
 
-    public ChaseBehaviour(Transform targetTransform) => _targetTransform = targetTransform;
+    private bool isActiveBehaviour;
 
-    public Vector3 GetDirection(Vector3 characterPosition)
+    public ChaseBehaviour(EnemyCharacter enemyCharacter, PlayerCharacter playerCharacter)
     {
-        if (Vector3.Distance(characterPosition, _targetTransform.position) <= DeltaDistance)
-            return Vector3.zero;
+        _enemyCharacter = enemyCharacter;
+        _playerCharacter = playerCharacter;
+    }
 
-        return (_targetTransform.position - characterPosition).normalized;
+    public void Start() => isActiveBehaviour = true;
+
+    public void Stop() => isActiveBehaviour = false;
+
+    public void Reset() => isActiveBehaviour = true;
+
+    public void CustomUpdate(Vector3 characterPosition)
+    {
+        if (isActiveBehaviour == false)
+            return;
+
+        Vector3 direction;
+
+        if (Vector3.Distance(characterPosition, _playerCharacter.Transform.position) <= DeltaDistance)
+            direction = Vector3.zero;
+        else
+            direction = (_playerCharacter.Transform.position - characterPosition).normalized;
+
+        _enemyCharacter.SetMoveDirection(direction);
+        _enemyCharacter.SetRotationDirection(direction);
     }
 }

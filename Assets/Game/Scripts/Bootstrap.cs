@@ -24,7 +24,7 @@ public class Bootstrap : MonoBehaviour
         _playerInput = new PlayerInput();
 
         PlayerCharacterStats playerCharacterStats = new PlayerCharacterStats(_moveSpeed, _rotationSpeed);
-        EnemyCharacterStats enemyCharacterStats = new EnemyCharacterStats(_moveSpeed / _enemySpeedDivider, _rotationSpeed, _enemySpawnPointsContainer.SpawnPoints, _enemyMaterial);
+        CommonEnemyCharacterStats commonEnemyCharacterStats = new CommonEnemyCharacterStats(_moveSpeed / _enemySpeedDivider, _rotationSpeed, _enemyMaterial);
 
         PlayerSpawner playerSpawner = new PlayerSpawner(_characterPrefab, playerCharacterStats);
         PlayerCharacter playerCharacter = playerSpawner.SpawnPlayer();
@@ -32,14 +32,14 @@ public class Bootstrap : MonoBehaviour
 
         _cameraTargetFollower.Initialize(playerCharacter.Transform);
 
-        EnemiesSpawner enemiesSpawner = new EnemiesSpawner(_characterPrefab, _enemyPlayerDetectorPrefab, enemyCharacterStats);
+        EnemiesSpawner enemiesSpawner = new EnemiesSpawner(_characterPrefab, _enemyPlayerDetectorPrefab, commonEnemyCharacterStats, _enemySpawnPointsContainer.SpawnPoints);
         List<EnemyCharacter> enemyCharacters = new List<EnemyCharacter>(enemiesSpawner.SpawnEnemies());
 
         EnemiesBrainsFactory enemiesBrainsFactory = new EnemiesBrainsFactory();
 
         foreach (var enemyCharacter in enemyCharacters)
         {
-            EnemyBrain enemyCharacterBrain = enemiesBrainsFactory.GetBrain(enemyCharacter);
+            EnemyBrain enemyCharacterBrain = enemiesBrainsFactory.GetBrain(enemyCharacter, playerCharacter);
 
             if (enemyCharacterBrain != null)
                 _enemyCharactersBrains.Add(enemyCharacterBrain);

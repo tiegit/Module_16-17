@@ -37,6 +37,9 @@ public class Game
 
             foreach (EnemyCharacter enemyCharacter in _enemyCharacters)
                 enemyCharacter.Reset();
+
+            foreach (EnemyBrain enemyCharacterBrain in _enemyCharactersBrains)
+                enemyCharacterBrain.Reset();
         }
     }
 }

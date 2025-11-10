@@ -1,18 +1,39 @@
 ﻿using UnityEngine;
 
-public class RunAwayBehaviour
+public class RunAwayBehaviour : IBehaviour
 {
     private const float DeltaDistance = 0.6f;
 
+    private EnemyCharacter _enemyCharacter;
     private Transform _targetTransform;
 
-    public RunAwayBehaviour(Transform targetTransform) => _targetTransform = targetTransform;
+    private bool isActiveBehaviour;
 
-    public Vector3 GetDirection(Vector3 characterPosition)
+    public RunAwayBehaviour(EnemyCharacter enemyCharacter, PlayerCharacter playerCharacter)
     {
-        if (Vector3.Distance(characterPosition, _targetTransform.position) <= DeltaDistance)
-            return Vector3.zero;
+        _targetTransform = playerCharacter.Transform;
+        _enemyCharacter = enemyCharacter;
+    }
 
-        return (characterPosition - _targetTransform.position).normalized;
+    public void Start() => isActiveBehaviour = true;
+
+    public void Stop() => isActiveBehaviour = false;
+
+    public void Reset() => isActiveBehaviour = true;
+
+    public void CustomUpdate(Vector3 characterPosition)
+    {
+        if (isActiveBehaviour == false)
+            return;
+
+        Vector3 direction;
+
+        if (Vector3.Distance(characterPosition, _targetTransform.position) <= DeltaDistance)
+            direction = Vector3.zero;
+        else
+            direction = (characterPosition - _targetTransform.position).normalized;
+
+        _enemyCharacter.SetMoveDirection(direction);
+        _enemyCharacter.SetRotationDirection(direction);
     }
 }

@@ -1,19 +1,12 @@
 ﻿using UnityEngine;
 
-public class NoMoveBehaviour
+public class NoMoveBehaviour : IBehaviour
 {
-    private EnemyCharacter _enemyCharacter;
-    private EnemyPlayerDetector _enemyPlayerDetector;
+    public void Start() { }
 
-    public NoMoveBehaviour(EnemyCharacter enemyCharacter, EnemyPlayerDetector enemyPlayerDetector)
-    {
-        _enemyCharacter = enemyCharacter;
-        _enemyPlayerDetector = enemyPlayerDetector;
-    }
+    public void Stop() { }
 
-    public void CustomUpdate()
-    {
-        //if (_enemyPlayerDetector != null && _enemyPlayerDetector.TargetTransform != null)
-        //    _enemyCharacter.SetNewBehaviour();
-    }
+    public void Reset() { }
+
+    public void CustomUpdate(Vector3 characterPosition) { }
 }

@@ -13,10 +13,14 @@ public class EnemyCharacter : Character
         SetEnemyMaterial();
     }
 
-    public void Kill()
+    public void ToggleActivity(bool isActive)
     {
-        //TODO добавить эффект уничтожения
-        gameObject.SetActive(false);
+        if (isActive == false)
+        {
+            //TODO добавить эффект уничтожения
+        }
+
+        gameObject.SetActive(isActive);
     }
 
     private void SetEnemyMaterial()

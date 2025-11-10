@@ -1,17 +1,35 @@
-﻿public class PanicDieBehaviour
+﻿using UnityEngine;
+
+public class PanicDieBehaviour : IBehaviour
 {
     private EnemyCharacter _enemyCharacter;
     private EnemyPlayerDetector _enemyPlayerDetector;
 
-    public PanicDieBehaviour(EnemyCharacter enemyCharacter, EnemyPlayerDetector enemyPlayerDetector)
+    private bool isActiveBehaviour;
+
+    public PanicDieBehaviour(EnemyCharacter enemyCharacter)
     {
         _enemyCharacter = enemyCharacter;
-        _enemyPlayerDetector = enemyPlayerDetector;
+        _enemyPlayerDetector = enemyCharacter.EnemyCharacterStats.EnemyPlayerDetector;
     }
 
-    public void CustomUpdate()
+    public void Start() => isActiveBehaviour = true;
+
+    public void Stop() => isActiveBehaviour = false;
+
+    public void Reset()
     {
+        _enemyCharacter.ToggleActivity(true);
+
+        isActiveBehaviour = true;
+    }
+
+    public void CustomUpdate(Vector3 characterPosition)
+    {
+        if (isActiveBehaviour == false)
+            return;
+
         if (_enemyPlayerDetector != null && _enemyPlayerDetector.TargetTransform != null)
-            _enemyCharacter.Kill();
+            _enemyCharacter.ToggleActivity(false);
     }
 }
