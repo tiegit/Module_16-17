@@ -17,12 +17,7 @@ public class PanicDieBehaviour : IBehaviour
 
     public void Stop() => isActiveBehaviour = false;
 
-    public void Reset()
-    {
-        _enemyCharacter.ToggleActivity(true);
-
-        isActiveBehaviour = true;
-    }
+    public void Reset() => isActiveBehaviour = true;
 
     public void CustomUpdate(Vector3 characterPosition)
     {
@@ -30,6 +25,9 @@ public class PanicDieBehaviour : IBehaviour
             return;
 
         if (_enemyPlayerDetector != null && _enemyPlayerDetector.TargetTransform != null)
-            _enemyCharacter.ToggleActivity(false);
+        {
+            _enemyCharacter.DeactivateEnemy();
+            _enemyPlayerDetector.Reset();
+        }
     }
 }

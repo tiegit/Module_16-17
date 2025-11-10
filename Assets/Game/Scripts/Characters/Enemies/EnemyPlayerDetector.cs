@@ -15,4 +15,6 @@ public class EnemyPlayerDetector : MonoBehaviour
         if (other.TryGetComponent(out PlayerCharacter player))
             TargetTransform = null;
     }
+
+    public void Reset() => TargetTransform = null;
 }

@@ -2,7 +2,7 @@
 
 public class ChaseBehaviour : IBehaviour
 {
-    private const float DeltaDistance = 0.6f;
+    private const float DeltaDistance = 1.2f;
 
     private EnemyCharacter _enemyCharacter;
     private PlayerCharacter _playerCharacter;

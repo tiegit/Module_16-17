@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 {
     private Rigidbody _rigidbody;
-    
+
     private Vector3 _initialPosition;
     private Quaternion _initialRotation;
 

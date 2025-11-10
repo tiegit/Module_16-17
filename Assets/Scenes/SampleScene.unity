@@ -5083,6 +5083,8 @@ MonoBehaviour:
   _enemyMaterial: {fileID: 2100000, guid: 33264d6399235d349a53e5df70ea6a1c, type: 2}
   _enemyPlayerDetectorPrefab: {fileID: 349417175302045627, guid: 2fb6854dac8bd1d428b9715a2f9965b5,
     type: 3}
+  _explosionPrefab: {fileID: 5339739117810204693, guid: 26e1cb216e3635e4a820f58a1118d6b9,
+    type: 3}
   _cameraTargetFollower: {fileID: 330585548}
   _enemySpawnPointsContainer: {fileID: 470581407}
 --- !u!1001 &6870114349386281167

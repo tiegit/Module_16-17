@@ -10,6 +10,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField, Space(15)] private float _enemySpeedDivider = 1.5f;
     [SerializeField] private Material _enemyMaterial;
     [SerializeField] private EnemyPlayerDetector _enemyPlayerDetectorPrefab;
+    [SerializeField] private GameObject _explosionPrefab;
 
     [SerializeField, Space(15)] private TargetFollower _cameraTargetFollower;
 
@@ -24,7 +25,7 @@ public class Bootstrap : MonoBehaviour
         _playerInput = new PlayerInput();
 
         PlayerCharacterStats playerCharacterStats = new PlayerCharacterStats(_moveSpeed, _rotationSpeed);
-        CommonEnemyCharacterStats commonEnemyCharacterStats = new CommonEnemyCharacterStats(_moveSpeed / _enemySpeedDivider, _rotationSpeed, _enemyMaterial);
+        CommonEnemyCharacterStats commonEnemyCharacterStats = new CommonEnemyCharacterStats(_moveSpeed / _enemySpeedDivider, _rotationSpeed, _enemyMaterial, _explosionPrefab);
 
         PlayerSpawner playerSpawner = new PlayerSpawner(_characterPrefab, playerCharacterStats);
         PlayerCharacter playerCharacter = playerSpawner.SpawnPlayer();

@@ -35,11 +35,11 @@ public class Game
         {
             _playerCharacter.Reset();
 
-            foreach (EnemyCharacter enemyCharacter in _enemyCharacters)
-                enemyCharacter.Reset();
-
             foreach (EnemyBrain enemyCharacterBrain in _enemyCharactersBrains)
                 enemyCharacterBrain.Reset();
+
+            foreach (EnemyCharacter enemyCharacter in _enemyCharacters)
+                enemyCharacter.Reset();
         }
     }
 }

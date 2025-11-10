@@ -35,6 +35,7 @@ public class EnemiesSpawner
             _enemyCharacterStats = new EnemyCharacterStats(_commonEnemyCharacterStats.CurrentMoveSpeed,
                                                            _commonEnemyCharacterStats.CurrentRotationSpeed,
                                                            _commonEnemyCharacterStats.Material,
+                                                           _commonEnemyCharacterStats.ExplosionPrefab,
                                                            spawnPoint,
                                                            spawnPoint.WaypointTransforms,
                                                            enemyPlayerDetector);

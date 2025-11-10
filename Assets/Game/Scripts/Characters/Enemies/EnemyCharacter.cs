@@ -2,6 +2,8 @@
 
 public class EnemyCharacter : Character
 {
+    private Vector3 _offset = new Vector3(0, 2, 0);
+
     public EnemyCharacterStats EnemyCharacterStats { get; private set; }
 
     public override void Initialize(CharacterStats characterStats)
@@ -13,14 +15,11 @@ public class EnemyCharacter : Character
         SetEnemyMaterial();
     }
 
-    public void ToggleActivity(bool isActive)
+    public void DeactivateEnemy()
     {
-        if (isActive == false)
-        {
-            //TODO добавить эффект уничтожения
-        }
+        Instantiate(EnemyCharacterStats.ExplosionPrefab, Transform.position + _offset, Quaternion.identity);
 
-        gameObject.SetActive(isActive);
+        gameObject.SetActive(false);
     }
 
     private void SetEnemyMaterial()

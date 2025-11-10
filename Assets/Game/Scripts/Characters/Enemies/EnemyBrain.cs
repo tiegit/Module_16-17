@@ -47,8 +47,6 @@ public class EnemyBrain
             SetBehaviour(_idleBehaviour);
         else if (_enemyPlayerDetector.TargetTransform != null && _currentBehaviour == _idleBehaviour)
             SetBehaviour(_reactionBehaviour);
-
-        Debug.Log($"{_currentBehaviour}");
     }
 
     public void Reset() => _currentBehaviour.Reset();
