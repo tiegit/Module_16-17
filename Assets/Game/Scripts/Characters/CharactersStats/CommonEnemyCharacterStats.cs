@@ -8,5 +8,5 @@ public class CommonEnemyCharacterStats : CharacterStats
         Material = material;
     }
 
-    public Material Material { get; }    
+    public Material Material { get; }
 }

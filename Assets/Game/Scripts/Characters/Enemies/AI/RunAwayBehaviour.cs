@@ -2,8 +2,6 @@
 
 public class RunAwayBehaviour : IBehaviour
 {
-    private const float DeltaDistance = 0.6f;
-
     private EnemyCharacter _enemyCharacter;
     private Transform _targetTransform;
 
@@ -26,12 +24,7 @@ public class RunAwayBehaviour : IBehaviour
         if (isActiveBehaviour == false)
             return;
 
-        Vector3 direction;
-
-        if (Vector3.Distance(characterPosition, _targetTransform.position) <= DeltaDistance)
-            direction = Vector3.zero;
-        else
-            direction = (characterPosition - _targetTransform.position).normalized;
+        Vector3 direction = (characterPosition - _targetTransform.position).normalized;
 
         _enemyCharacter.SetMoveDirection(direction);
         _enemyCharacter.SetRotationDirection(direction);

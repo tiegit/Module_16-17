@@ -14,7 +14,7 @@ public class EnemiesBrainsFactory
         {
             case IdleBehaviour.None:
             case IdleBehaviour.NoMove:
-                idleBehavior = new NoMoveBehaviour();
+                idleBehavior = new NoMoveBehaviour(enemyCharacter);
                 break;
 
             case IdleBehaviour.PatrolBetweenPoints:
@@ -30,11 +30,10 @@ public class EnemiesBrainsFactory
                 break;
         }
 
-
         switch (selectedReactionBehaviour)
         {
             case EnemyReaction.None:
-                reactionBehaviour = new NoMoveBehaviour();
+                reactionBehaviour = new NoMoveBehaviour(enemyCharacter);
                 break;
 
             case EnemyReaction.RunAway:
